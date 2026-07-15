@@ -53,14 +53,15 @@ export const registrarAnime = async (req: Request, res: Response) => {
 
     if(!arcrivo){
         res.status(400).json({error: "Debe seleccionar una foto"})
+        return;
     }
     try {
         const nuevoAnime = await prisma.items.create({
             data: {
                 titulo: titulo,
                 sinopsis:sinopsis,
-                calificacion: calificacion,
-                episodios: episodios,
+                calificacion: parseFloat(calificacion) || 0, 
+                episodios: parseInt(episodios) || 0,
                 estado: estado,
                 formato: formato,
                 genero: genero,
@@ -88,8 +89,8 @@ export const editarAnime = async (req: Request, res: Response) => {
             data:{
                 titulo: titulo,
                 sinopsis:sinopsis,
-                calificacion: calificacion,
-                episodios: episodios,
+                calificacion: parseFloat(calificacion) || 0, 
+                episodios: parseInt(episodios) || 0,
                 estado: estado,
                 formato: formato,
                 genero: genero,

@@ -6,7 +6,7 @@ function ModalFormulario({ anime, onClose, onActualizar, token }) {
     const [formData, setFormData] = useState({
         titulo: anime?.titulo || '',
         sinopsis: anime?.sinopsis || '',
-        episodio: anime?.episodio || 0,
+        episodios: anime?.episodios || 0,
         calificacion: anime?.calificacion || 0.0,
         formato: anime?.formato || '',
         estado: anime?.estado || 'En Emision'
@@ -122,8 +122,8 @@ function ModalFormulario({ anime, onClose, onActualizar, token }) {
                             <label>Episodios:</label>
                             <input 
                                 type="number" 
-                                name="episodio" 
-                                value={formData.episodio} onChange={manejarCambio} 
+                                name="episodios" 
+                                value={formData.episodios} onChange={manejarCambio} 
                             />
                         </div>
 

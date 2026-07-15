@@ -2,7 +2,7 @@ import { Router } from "express";
 import multer from "multer";
 import { login, perfil, registrar } from "../controllers/auth.controllers.js";
 import { logout, validarAuth } from "../middlewares/auth.middlewares.js";
-import { editarAnime, obtenerAnimes, obtenerFotos, registrarAnime } from "../controllers/items.controllers.js";
+import { editarAnime, eliminar, obtenerAnimes, obtenerFotos, registrarAnime } from "../controllers/items.controllers.js";
 
 const router = Router();
 
@@ -16,6 +16,7 @@ router.post("/logout", logout);
 router.get("/blob", validarAuth, obtenerAnimes);
 router.get("/blob/:id/foto", validarAuth, obtenerFotos);
 router.post("/blob/crear", validarAuth, upload.single("file"), registrarAnime);
-router.put("/blob/:id", validarAuth, editarAnime)
+router.put("/blob/:id", validarAuth, upload.single("file"), editarAnime)
+router.delete("/blob/:id", validarAuth, eliminar)
 
 export default router;
