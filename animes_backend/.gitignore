@@ -1,0 +1,26 @@
+node_modules/
+# Keep environment variables out of version control
+.env
+
+/generated/prisma
+
+# --- Node ---
+npm-debug.log
+dist/
+build/
+
+# --- Entorno ---
+.env.local
+
+# --- IDEs y Sistema ---
+.vscode/
+.DS_Store
+*.log
+
+# --- Prisma ---
+# Normalmente no se sube la carpeta de cliente generada, 
+# ya que se regenera al ejecutar npm install
+/node_modules/.prisma/
+
+
+/generated/prisma

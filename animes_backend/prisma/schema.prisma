@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model empleados {
+  id              Int               @id @default(autoincrement())
+  cargo           String            @db.VarChar(50)
+  nombre          String            @db.VarChar(100)
+  tarea_empleados tarea_empleados[] @ignore
+}
+
+model items {
+  id           Int     @id @default(autoincrement())
+  calificacion Float
+  episodios    Int
+  estado       String? @db.VarChar(20)
+  formato      String? @db.VarChar(20)
+  foto         Bytes?
+  genero       String  @db.VarChar(250)
+  mime_type    String? @db.VarChar(255)
+  sinopsis     String?
+  titulo       String  @db.VarChar(150)
+}
+
+model proyectos {
+  id           Int      @id @default(autoincrement())
+  descripcion  String?  @db.VarChar(250)
+  fecha_inicio DateTime @db.Date
+  nombre       String   @db.VarChar(100)
+  tareas       tareas[]
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model tarea_empleados {
+  tarea_id    Int
+  empleado_id Int
+  empleados   empleados @relation(fields: [empleado_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk1l2d4uxc4k7odetvgm80q45wx")
+  tareas      tareas    @relation(fields: [tarea_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fkr8cjd0ncct2u58jcr6pdykfjy")
+
+  @@ignore
+}
+
+model tareas {
+  id              Int               @id @default(autoincrement())
+  costo_estimado  Float
+  descripcion     String            @db.VarChar(200)
+  fecha_limite    DateTime          @db.Date
+  proyecto_id     Int
+  prioridad       String            @default("BAJA") @db.VarChar(255)
+  tarea_empleados tarea_empleados[] @ignore
+  proyectos       proyectos         @relation(fields: [proyecto_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fkft65ny3hi8vlpmybmhpndas8d")
+}
+
+model usuarios {
+  id       Int    @id @default(autoincrement())
+  password String @db.VarChar(255)
+  rol      String @db.VarChar(255)
+  username String @unique(map: "ukm2dvbwfge291euvmk6vkkocao") @db.VarChar(255)
+}
+
+model vehiculos {
+  id        Int     @id @default(autoincrement())
+  foto      Bytes?
+  marca     String  @db.VarChar(255)
+  mime_type String? @db.VarChar(255)
+  modelo    String  @db.VarChar(255)
+}
