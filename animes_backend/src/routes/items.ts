@@ -89,7 +89,7 @@ router.post("/logout", validarAuth, logout);
 
 /**
  * @swagger
- * /blob:
+ * /auth/blob:
  *   get:
  *     summary: Obtiene la lista completa de animes
  *     tags: [Items]
@@ -105,7 +105,7 @@ router.get("/blob", validarAuth, obtenerAnimes);
 
 /**
  * @swagger
- * /blob/{id}/foto:
+ * /auth/blob/{id}/foto:
  *   get:
  *     summary: Obtiene la imagen de un anime por su ID
  *     tags: [Items]
@@ -127,7 +127,7 @@ router.get("/blob/:id/foto", validarAuth, obtenerFotos);
 
 /**
  * @swagger
- * /blob/crear:
+ * /auth/blob/crear:
  *   post:
  *     summary: Registra un nuevo anime con imagen
  *     tags: [Items]
@@ -158,7 +158,7 @@ router.post("/blob/crear", validarAuth, upload.single("file"), registrarAnime);
 
 /**
  * @swagger
- * /blob/{id}:
+ * /auth/blob/{id}:
  *   put:
  *     summary: Actualiza un anime existente
  *     tags: [Items]
@@ -195,7 +195,7 @@ router.put("/blob/:id", validarAuth, editarAnime)
 
 /**
  * @swagger
- * /blob/{id}:
+ * /auth/blob/{id}:
  *   delete:
  *     summary: Elimina un anime
  *     tags: [Items]
